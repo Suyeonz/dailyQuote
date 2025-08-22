@@ -1,1 +1,81 @@
-ddd
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>오늘의 명언</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
+
+  body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #FFD1DC, #FFF3B0);
+    font-family: 'Nanum Pen Script', cursive;
+    text-align: center;
+    color: #5C3D2E;
+    overflow: hidden;
+  }
+
+  .quote-box {
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 25px;
+    padding: 30px 20px;
+    max-width: 90%;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+  }
+
+  .quote {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  .author {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #D35400;
+  }
+
+  @media (min-width: 600px) {
+    .quote {
+      font-size: 2.2rem;
+    }
+    .author {
+      font-size: 1.5rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="quote-box">
+    <div class="quote" id="quote">잠깐만~ 명언 준비 중...</div>
+    <div class="author" id="author"></div>
+  </div>
+
+<script>
+  const quotes = [
+    { text: "작은 친절이 큰 행복을 만든다.", author: "익명" },
+    { text: "오늘도 너 자신을 믿어.", author: "익명" },
+    { text: "행복은 마음속에서 시작된다.", author: "익명" },
+    { text: "포기하지 않는 자에게 기회가 온다.", author: "익명" },
+    { text: "사랑은 나눌수록 커진다.", author: "익명" },
+    { text: "오늘의 실패는 내일의 성공 밑거름.", author: "익명" },
+    { text: "웃음은 최고의 명약이다.", author: "익명" }
+  ];
+
+  function showQuote() {
+    const today = new Date();
+    const index = today.getDate() % quotes.length; // 날짜 기준 랜덤 배치
+    document.getElementById('quote').innerText = quotes[index].text;
+    document.getElementById('author').innerText = quotes[index].author;
+  }
+
+  showQuote();
+</script>
+</body>
+</html>
