@@ -3,79 +3,181 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>오늘의 명언</title>
+<title>오늘의 긍정 영어 문장</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap');
-
   body {
     margin: 0;
-    padding: 0;
+    padding: 20px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     background: linear-gradient(135deg, #FFD1DC, #FFF3B0);
-    font-family: 'Nanum Pen Script', cursive;
+    font-family: Arial, sans-serif;
     text-align: center;
     color: #5C3D2E;
-    overflow: hidden;
+  }
+
+  /* 이미지 영역 */
+  .image-container img {
+    width: 100%;        /* 문장 박스 기준 */
+    max-width: 120%;    /* 박스보다 살짝 크게 */
+    height: auto;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .quote-box {
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 25px;
-    padding: 30px 20px;
-    max-width: 90%;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 25px 20px;
+    max-width: 90%;      /* 화면 폭에 맞춰 유동적 */
+    width: 300px;        /* 기본 문장 박스 크기 */
     box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    margin: 0 auto;
   }
 
   .quote {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
     line-height: 1.4;
   }
 
   .author {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color: #D35400;
+    margin-bottom: 15px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 15px;
+    background-color: #FFB6B9;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .btn:hover {
+    background-color: #FF8C94;
   }
 
   @media (min-width: 600px) {
     .quote {
-      font-size: 2.2rem;
+      font-size: 2rem;
     }
     .author {
-      font-size: 1.5rem;
+      font-size: 1.3rem;
+    }
+    .btn {
+      font-size: 1.1rem;
+      padding: 12px 24px;
     }
   }
 </style>
 </head>
 <body>
+  <!-- 그림 영역 -->
+  <div class="image-container">
+    <img src="happy.png" alt="수연이 그림">
+  </div>
+
+  <!-- 문장 카드 -->
   <div class="quote-box">
-    <div class="quote" id="quote">잠깐만~ 명언 준비 중...</div>
-    <div class="author" id="author"></div>
+    <div class="quote" id="quote">Loading...</div>
+    <div class="author" id="author">🐰</div>
+    <button class="btn" onclick="showRandomQuote()">더보기</button>
   </div>
 
 <script>
   const quotes = [
-    { text: "작은 친절이 큰 행복을 만든다.", author: "익명" },
-    { text: "오늘도 너 자신을 믿어.", author: "익명" },
-    { text: "행복은 마음속에서 시작된다.", author: "익명" },
-    { text: "포기하지 않는 자에게 기회가 온다.", author: "익명" },
-    { text: "사랑은 나눌수록 커진다.", author: "익명" },
-    { text: "오늘의 실패는 내일의 성공 밑거름.", author: "익명" },
-    { text: "웃음은 최고의 명약이다.", author: "익명" }
+    { text: "You are amazing today!", author: "오늘도 넌 최고야!" },
+    { text: "Keep going, step by step.", author: "한 걸음씩 천천히 해도 돼." },
+    { text: "Happiness starts from within.", author: "행복은 마음속에서 시작돼." },
+    { text: "Smile, it looks great on you.", author: "웃어, 엄마한테 잘 어울려!" },
+    { text: "Believe in yourself!", author: "자신을 믿어!" },
+    { text: "Every day is a new beginning.", author: "오늘은 새로운 시작이야." },
+    { text: "You are capable of amazing things.", author: "넌 놀라운 일을 해낼 수 있어." },
+    { text: "Embrace the journey, not just the destination.", author: "목적지만 보지 말고 여정을 즐겨봐." },
+  { text: "Small steps lead to big changes.", author: "작은 걸음이 큰 변화를 만든다." },
+  { text: "You have the power to create your own happiness.", author: "넌 스스로 행복을 만들 힘이 있어." },
+  { text: "Every challenge is an opportunity to grow.", author: "모든 도전은 성장의 기회야." },
+  { text: "Keep your face always toward the sunshine.", author: "항상 햇살을 향해 얼굴을 돌려." },
+  { text: "Mistakes are proof that you are trying.", author: "실수는 노력하고 있다는 증거야." },
+  { text: "Your potential is limitless.", author: "너의 잠재력에는 한계가 없어." },
+  { text: "Believe in the magic of new beginnings.", author: "새로운 시작의 마법을 믿어." },
+  { text: "Happiness is found in simple moments.", author: "행복은 소소한 순간 속에 있어." },
+  { text: "You are stronger than you think.", author: "넌 생각보다 더 강해." },
+  { text: "Let your dreams be bigger than your fears.", author: "두려움보다 꿈을 크게 가져." },
+  { text: "Kindness is never wasted.", author: "친절은 절대 헛되지 않아." },
+  { text: "Take time to enjoy the little things.", author: "작은 것들을 즐길 시간을 가져." },
+  { text: "Your smile can brighten someone's day.", author: "네 미소가 누군가의 하루를 밝게 해." },
+  { text: "Focus on what you can control.", author: "네가 통제할 수 있는 것에 집중해." },
+  { text: "Every day is a fresh start.", author: "매일이 새로운 시작이야." },
+  { text: "Positivity attracts positivity.", author: "긍정은 긍정을 끌어당겨." },
+  { text: "Be proud of how far you've come.", author: "지금까지 온 길을 자랑스러워해." },
+  { text: "Opportunities are everywhere, stay alert.", author: "기회는 어디에나 있으니 항상 주의해." },
+  { text: "Your attitude determines your direction.", author: "너의 태도가 방향을 결정해." },
+  { text: "Cherish every small victory.", author: "작은 승리 하나하나를 소중히 해." },
+  { text: "Growth happens outside your comfort zone.", author: "성장은 편안한 영역 밖에서 일어나." },
+  { text: "You are capable of more than you know.", author: "넌 네가 아는 것보다 더 많은 걸 할 수 있어." },
+  { text: "Let go of what you cannot change.", author: "바꿀 수 없는 건 놓아줘." },
+  { text: "Joy is found in the present moment.", author: "기쁨은 지금 이 순간에 있어." },
+  { text: "Persistence beats resistance.", author: "끈기가 저항을 이겨." },
+  { text: "Your thoughts shape your reality.", author: "너의 생각이 현실을 만들어." },
+  { text: "Celebrate progress, not perfection.", author: "완벽보다 진전을 축하해." },
+  { text: "Life is better when you laugh.", author: "웃을 때 삶이 더 좋아져." },
+  { text: "Challenges make you stronger.", author: "도전이 널 더 강하게 만들어." },
+  { text: "Be fearless in the pursuit of your dreams.", author: "꿈을 쫓는 데 두려워하지 마." },
+  { text: "Love yourself first and everything else falls into place.", author: "먼저 자신을 사랑하면 모든 게 맞춰져." },
+  { text: "In every moment, there is something to be grateful for.", author: "모든 순간에 감사할 것이 있어." },
+  { text: "Your energy introduces you before you speak.", author: "너의 에너지가 말을 하기 전에 널 보여줘." },
+  { text: "Do what you love and love what you do.", author: "좋아하는 일을 하고, 하는 일을 사랑해." },
+  { text: "Happiness is a choice, choose it daily.", author: "행복은 선택이야, 매일 선택해." },
+  { text: "Be the reason someone smiles today.", author: "오늘 누군가가 웃게 만드는 사람이 돼." },
+  { text: "Focus on solutions, not problems.", author: "문제보다 해결책에 집중해." },
+  { text: "Courage is not the absence of fear.", author: "용기는 두려움이 없는 게 아니야." },
+  { text: "Dream big, start small, act now.", author: "크게 꿈꾸고, 작게 시작하고, 지금 행동해." },
+  { text: "The best way to predict the future is to create it.", author: "미래를 예측하는 가장 좋은 방법은 만들어가는 거야." },
+  { text: "Gratitude turns what we have into enough.", author: "감사는 가진 것을 충분하게 만들어." },
+  { text: "Do more of what makes you happy.", author: "널 행복하게 하는 걸 더 해." },
+  { text: "Life is short, make it sweet.", author: "인생은 짧으니 달콤하게 살아." },
+  { text: "Keep your mind open and your heart kind.", author: "마음을 열고, 마음씨는 친절하게." },
+  { text: "Believe you can and you're halfway there.", author: "할 수 있다고 믿으면 이미 반은 온 거야." },
+  { text: "The journey of a thousand miles begins with a single step.", author: "천리 길도 한 걸음부터 시작돼." },
+  { text: "Let your light shine bright.", author: "네 빛을 밝게 빛내." },
+  { text: "Success is a series of small wins.", author: "성공은 작은 승리들의 연속이야." },
+  { text: "You are enough just as you are.", author: "있는 그대로의 너면 충분해." },
+  { text: "Take a deep breath and start again.", author: "깊게 숨 쉬고 다시 시작해." },
+  { text: "Happiness grows when shared.", author: "행복은 나누면 커져." }
   ];
 
-  function showQuote() {
+  // 날짜 기반으로 매일 다른 랜덤 문장 선택
+  function showQuoteOfTheDay() {
     const today = new Date();
-    const index = today.getDate() % quotes.length; // 날짜 기준 랜덤 배치
+    const daySeed = today.getFullYear() * 10000 + (today.getMonth()+1) * 100 + today.getDate();
+    const index = daySeed % quotes.length; // 매일 같은 index 고정
     document.getElementById('quote').innerText = quotes[index].text;
     document.getElementById('author').innerText = quotes[index].author;
   }
 
-  showQuote();
+  // 버튼 눌러서 수동 랜덤 보기
+  function showRandomQuote() {
+    const index = Math.floor(Math.random() * quotes.length);
+    document.getElementById('quote').innerText = quotes[index].text;
+    document.getElementById('author').innerText = quotes[index].author;
+  }
+
+  // 페이지 열리면 오늘의 문장 보여주기
+  showQuoteOfTheDay();
 </script>
 </body>
 </html>
